@@ -58,6 +58,7 @@ def newton_raphson(x_0, f, E):
 
     return x_next
 
+#No se grafica la funcion 4 ya al dividir f' y f'', f'' es 0 y no se puede realizar la división
 
 x_0=1
 n_valores= [0.5, 0.1, 0.001, 0.0001]
