@@ -3,11 +3,6 @@ import matplotlib.pyplot as plt
 def primera_derivada(x, f):
     delta = 0.0001
     return (f(x + delta) - f(x - delta)) / (2 * delta)
-
-def segunda_derivada(x, f):
-    delta = 0.0001
-    return (f(x + delta) - 2 * f(x) + f(x - delta)) / (delta ** 2)
-
 # ---------------------------------------------------------
 def f_lata(x):
     return ((2 * np.pi) * (x**2) + 500/x)
@@ -43,14 +38,21 @@ f6b=3
 def biseccionmethod(f_a, f_b, e, f):
     a = np.random.uniform(f_a, f_b)
     b = np.random.uniform(f_a, f_b)
-    x1 = a
-    x2 = b
+    
+    while(primera_derivada(a,f) > 0):
+        a = np.random.uniform(f_a, f_b)
+    
+    while (primera_derivada(b,f) < 0): 
+        b = np.random.uniform(f_a, f_b)
+    
+    x1=a
+    x2=b
     
     while True:
         z = (x1 + x2) / 2
         f_primaz = primera_derivada(z, f)
     
-        if abs(x2 - x1) < e:  
+        if abs(f_primaz) < e:  
             break
         elif f_primaz < 0:
             x1 = z
@@ -60,19 +62,20 @@ def biseccionmethod(f_a, f_b, e, f):
     return x1, x2
 
 
-
+#No se grafican la funcion 4 y 6 ya que se salen de rango y se ciclan
 
 n_valores= [0.5, 0.1, 0.001, 0.0001]
 funciones = [(f_lata, 'lata', latax_a, latax_b), (f_caja, 'caja', cajax_a, cajax_b),
-             (f3, 'f3', f3a, f3b), (f4, 'f4', f4a, f4b),
-             (f5, 'f5', f5a, f5b), (f6, 'f6', f6a, f6b)]
+             (f3, 'f3', f3a, f3b), #(f4, 'f4', f4a, f4b),
+             (f5, 'f5', f5a, f5b), #(f6, 'f6', f6a, f6b) 
+             ]
 
 
 fig, axs = plt.subplots(3, 2, figsize=(12, 12))
 fig.tight_layout(pad=5.0)
 
 #graficar
-#graficar
+
 for i, (f, title, a, b) in enumerate(funciones):
     row = i // 2
     col = i % 2
