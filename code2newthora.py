@@ -16,7 +16,7 @@ latax_a=0.5
 latax_b=8.5
 
 def f_caja(x):
-    return (20- 2*x) * (10- 2*x) * x
+    return -1* (20- 2*x) * (10- 2*x) * x
 cajax_a= 2
 cajax_b=3.1
 
